@@ -31,7 +31,7 @@ const SideMenu = () => {
 
   const {
     currentTheme: {
-      updatedTheme: { backgrounds },
+      updatedTheme: { backgrounds, texts },
     },
   } = themeContext;
 
@@ -62,7 +62,13 @@ const SideMenu = () => {
   };
 
   const drawer = (
-    <div style={{ height: "100%", backgroundColor: backgrounds.bg100 }}>
+    <div
+      style={{
+        height: "100%",
+        backgroundColor: backgrounds.bg100,
+        color: texts.text100,
+      }}
+    >
       <List>
         {["Inbox", "Starred"].map((text, index) => (
           <Section text={text} index={index} />
