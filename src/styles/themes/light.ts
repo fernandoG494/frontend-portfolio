@@ -1,12 +1,21 @@
 export default {
   themeType: "light",
-  colors: {
-    background: "#f5f5f5",
-    text: "#333",
+  backgrounds: {
+    bg100: "#ffffff",
+    bg200: "#f5f5f5",
+    bg300: "#cccccc",
   },
-
-  section: {
-    background: "#D9F7E7",
-    text: "#B0A8B9",
+  primaries: {
+    primary100: "#3f51b5",
+    primary200: "#757de8",
+    primary300: "#dedeff",
+  },
+  accents: {
+    accent100: "#2196f3",
+    accent200: "#003f8f",
+  },
+  texts: {
+    text100: "#333333",
+    text200: "#5c5c5c",
   },
 };

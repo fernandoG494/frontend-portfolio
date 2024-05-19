@@ -1,12 +1,21 @@
 export default {
   themeType: "dark",
-  colors: {
-    background: "#4B4453",
-    text: "#fff",
+  backgrounds: {
+    bg100: "#333333",
+    bg200: "#434343",
+    bg300: "#5c5c5c",
   },
-
-  section: {
-    background: "yellow",
-    text: "#333",
+  primaries: {
+    primary100: "#00ff00",
+    primary200: "#00df00",
+    primary300: "#009700",
+  },
+  accents: {
+    accent100: "#66ff33",
+    accent200: "#009800",
+  },
+  texts: {
+    text100: "#ffffff",
+    text200: "#e0e0e0",
   },
 };

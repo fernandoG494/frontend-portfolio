@@ -1,11 +1,12 @@
 import { useReducer } from "react";
-import { IPlaceThemeProvider, PlaceThemeContext } from "./context/ThemeContext";
 import SideMenu from "./layout/SideMenu";
 import light from "./styles/themes/light";
-import ThemeReducer from "./context/ThemeReducer";
 import { ThemeProvider } from "styled-components";
+import ThemeReducer from "./context/ThemeReducer";
+import { IPlaceThemeProvider, PlaceThemeContext } from "./context/ThemeContext";
 
 import "./App.scss";
+import { Container } from "@mui/material";
 
 function App() {
   const [currentTheme, setNewTheme] = useReducer(ThemeReducer, []);
@@ -22,7 +23,9 @@ function App() {
   return (
     <PlaceThemeContext.Provider value={themeContextProviderValue}>
       <ThemeProvider theme={currentTheme.updatedTheme}>
-        <SideMenu />
+        <Container>
+          <SideMenu />
+        </Container>
       </ThemeProvider>
     </PlaceThemeContext.Provider>
   );
