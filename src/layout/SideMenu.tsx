@@ -21,6 +21,11 @@ import {
 import dark from "../styles/themes/dark";
 import light from "../styles/themes/light";
 
+import DarkDev from "../assets/dev-icon-dark.svg";
+import LightDev from "../assets/dev-icon-light.svg";
+
+import "../styles/SideMenu.scss";
+
 const drawerWidth = 300;
 
 const SideMenu = () => {
@@ -32,6 +37,7 @@ const SideMenu = () => {
   const {
     currentTheme: {
       updatedTheme: { backgrounds, texts },
+      updatedTheme: { themeType },
     },
   } = themeContext;
 
@@ -69,6 +75,20 @@ const SideMenu = () => {
         color: texts.text100,
       }}
     >
+      <span>
+        <Stack
+          direction="row"
+          className="developer-portfolio-title"
+          spacing={1}
+        >
+          <img
+            src={themeType == "light" ? DarkDev : LightDev}
+            alt="Developer icon"
+            className="Dev-icon"
+          ></img>
+          <Typography variant="h5">Developer Portfolio</Typography>
+        </Stack>
+      </span>
       <List>
         {["Inbox", "Starred"].map((text, index) => (
           <Section text={text} index={index} />
