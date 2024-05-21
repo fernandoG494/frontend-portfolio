@@ -10,13 +10,13 @@ import {
   Switch,
   Toolbar,
 } from "@mui/material";
-import Section from "../components/Section";
 import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
 import {
   IPlaceThemeProvider,
   PlaceThemeContext,
 } from "../context/ThemeContext";
+import { sectionsData } from "../data/data";
 
 import dark from "../styles/themes/dark";
 import light from "../styles/themes/light";
@@ -25,10 +25,13 @@ import DarkDev from "../assets/dev-icon-dark.svg";
 import LightDev from "../assets/dev-icon-light.svg";
 
 import "../styles/SideMenu.scss";
+import { ISection } from "../interfaces/layout-interfaces";
+import Section from "../components/Section";
 
 const drawerWidth = 300;
 
-const SideMenu = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const SideMenu = ({ children }: any) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -90,9 +93,9 @@ const SideMenu = () => {
         </Stack>
       </span>
       <List>
-        {["Inbox", "Starred"].map((text, index) => (
-          <Section text={text} index={index} />
-        ))}
+        {sectionsData.map((section: ISection) => {
+          return <Section text={section.text} />;
+        })}
       </List>
     </div>
   );
@@ -182,21 +185,7 @@ const SideMenu = () => {
         }}
       >
         <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
+        {children}
       </Box>
     </Box>
   );
