@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useReducer } from "react";
+import SideMenu from "./layout/SideMenu";
+import light from "./styles/themes/light";
+import { ThemeProvider } from "styled-components";
+import ThemeReducer from "./context/ThemeReducer";
+import { IPlaceThemeProvider, PlaceThemeContext } from "./context/ThemeContext";
+
+import "./App.scss";
+import { Container, Typography } from "@mui/material";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentTheme, setNewTheme] = useReducer(ThemeReducer, []);
+
+  const themeContextProviderValue: IPlaceThemeProvider = {
+    currentTheme,
+    setNewTheme,
+  };
+
+  if (Array.isArray(currentTheme) && !currentTheme.length) {
+    setNewTheme(light);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <PlaceThemeContext.Provider value={themeContextProviderValue}>
+      <ThemeProvider theme={currentTheme.updatedTheme}>
+        <Container>
+          <SideMenu>
+            {
+              <Typography paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Rhoncus dolor purus non enim praesent elementum facilisis leo
+                vel. Risus at ultrices mi tempus imperdiet. Semper risus in
+                hendrerit gravida rutrum quisque non tellus. Convallis convallis
+                tellus id interdum velit laoreet id donec ultrices. Odio morbi
+                quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                adipiscing bibendum est ultricies integer quis. Cursus euismod
+                quis viverra nibh cras. Metus vulputate eu scelerisque felis
+                imperdiet proin fermentum leo. Mauris commodo quis imperdiet
+                massa tincidunt. Cras tincidunt lobortis feugiat vivamus at
+                augue. At augue eget arcu dictum varius duis at consectetur
+                lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
+                sapien faucibus et molestie ac.
+              </Typography>
+            }
+          </SideMenu>
+        </Container>
+      </ThemeProvider>
+    </PlaceThemeContext.Provider>
+  );
 }
 
-export default App
+export default App;
