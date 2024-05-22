@@ -6,7 +6,13 @@ import ThemeReducer from "./context/ThemeReducer";
 import { IPlaceThemeProvider, PlaceThemeContext } from "./context/ThemeContext";
 
 import "./App.scss";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import AboutMe from "./pages/AboutMe";
+import FrontendProjects from "./pages/FrontendProjects";
+import BackendProjects from "./pages/BackendProjects";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const [currentTheme, setNewTheme] = useReducer(ThemeReducer, []);
@@ -25,24 +31,14 @@ function App() {
       <ThemeProvider theme={currentTheme.updatedTheme}>
         <Container>
           <SideMenu>
-            {
-              <Typography paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Rhoncus dolor purus non enim praesent elementum facilisis leo
-                vel. Risus at ultrices mi tempus imperdiet. Semper risus in
-                hendrerit gravida rutrum quisque non tellus. Convallis convallis
-                tellus id interdum velit laoreet id donec ultrices. Odio morbi
-                quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                adipiscing bibendum est ultricies integer quis. Cursus euismod
-                quis viverra nibh cras. Metus vulputate eu scelerisque felis
-                imperdiet proin fermentum leo. Mauris commodo quis imperdiet
-                massa tincidunt. Cras tincidunt lobortis feugiat vivamus at
-                augue. At augue eget arcu dictum varius duis at consectetur
-                lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                sapien faucibus et molestie ac.
-              </Typography>
-            }
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/about-me" element={<AboutMe />} />
+              <Route path="/frontend-projects" element={<FrontendProjects />} />
+              <Route path="/backend-projects" element={<BackendProjects />} />
+              <Route path="/*" element={<ErrorPage />} />
+            </Routes>
           </SideMenu>
         </Container>
       </ThemeProvider>

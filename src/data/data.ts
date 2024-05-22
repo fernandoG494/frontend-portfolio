@@ -1,10 +1,10 @@
 import { ISection } from "../interfaces/layout-interfaces";
 
 const sectionsData: ISection[] = [
-  { text: "Dashboard" },
-  { text: "About me" },
-  { text: "Front end projects" },
-  { text: "Back end projects" },
+  { text: "Dashboard", url: "/dashboard" },
+  { text: "About me", url: "/about-me" },
+  { text: "Front end projects", url: "/frontend-projects" },
+  { text: "Back end projects", url: "/backend-projects" },
 ];
 
 export { sectionsData };

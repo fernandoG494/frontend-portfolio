@@ -5,7 +5,6 @@ import {
   CssBaseline,
   Drawer,
   IconButton,
-  List,
   Stack,
   Switch,
   Toolbar,
@@ -16,17 +15,12 @@ import {
   IPlaceThemeProvider,
   PlaceThemeContext,
 } from "../context/ThemeContext";
-import { sectionsData } from "../data/data";
 
 import dark from "../styles/themes/dark";
 import light from "../styles/themes/light";
 
-import DarkDev from "../assets/dev-icon-dark.svg";
-import LightDev from "../assets/dev-icon-light.svg";
-
 import "../styles/SideMenu.scss";
-import { ISection } from "../interfaces/layout-interfaces";
-import Section from "../components/Section";
+import DrawerMenu from "../components/DrawerMenu";
 
 const drawerWidth = 300;
 
@@ -36,13 +30,6 @@ const SideMenu = ({ children }: any) => {
   const [isClosing, setIsClosing] = useState(false);
 
   const themeContext = useContext(PlaceThemeContext);
-
-  const {
-    currentTheme: {
-      updatedTheme: { backgrounds, texts },
-      updatedTheme: { themeType },
-    },
-  } = themeContext;
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -69,36 +56,6 @@ const SideMenu = ({ children }: any) => {
       setNewTheme(light);
     }
   };
-
-  const drawer = (
-    <div
-      style={{
-        height: "100%",
-        backgroundColor: backgrounds.bg100,
-        color: texts.text100,
-      }}
-    >
-      <span>
-        <Stack
-          direction="row"
-          className="developer-portfolio-title"
-          spacing={1}
-        >
-          <img
-            src={themeType == "light" ? DarkDev : LightDev}
-            alt="Developer icon"
-            className="Dev-icon"
-          ></img>
-          <Typography variant="h5">Developer Portfolio</Typography>
-        </Stack>
-      </span>
-      <List>
-        {sectionsData.map((section: ISection) => {
-          return <Section text={section.text} />;
-        })}
-      </List>
-    </div>
-  );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -160,7 +117,7 @@ const SideMenu = ({ children }: any) => {
             },
           }}
         >
-          {drawer}
+          <DrawerMenu />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -173,7 +130,7 @@ const SideMenu = ({ children }: any) => {
           }}
           open
         >
-          {drawer}
+          <DrawerMenu />
         </Drawer>
       </Box>
       <Box
