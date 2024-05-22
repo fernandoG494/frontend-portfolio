@@ -44,7 +44,9 @@ const DrawerMenu = () => {
       </span>
       <List>
         {sectionsData.map((section: ISection) => {
-          return <Section text={section.text} />;
+          return (
+            <Section text={section.text} key={section.text} url={section.url} />
+          );
         })}
       </List>
     </div>

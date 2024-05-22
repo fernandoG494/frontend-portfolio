@@ -7,10 +7,18 @@ import {
 import { ISection } from "../interfaces/layout-interfaces";
 import IconSelector from "./IconSelector";
 
-const Section = ({ text }: ISection) => {
+import { useNavigate } from "react-router-dom";
+
+const Section = ({ text, url }: ISection) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate(url);
+  };
+
   return (
     <ListItem key={text} disablePadding>
-      <ListItemButton>
+      <ListItemButton onClick={handleNavigation}>
         <ListItemIcon>
           <IconSelector text={text} />
         </ListItemIcon>
