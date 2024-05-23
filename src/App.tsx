@@ -9,7 +9,6 @@ import "./App.scss";
 import { Container } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import AboutMe from "./pages/AboutMe";
 import FrontendProjects from "./pages/FrontendProjects";
 import BackendProjects from "./pages/BackendProjects";
 import ErrorPage from "./pages/ErrorPage";
@@ -34,7 +33,6 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/about-me" element={<AboutMe />} />
               <Route path="/frontend-projects" element={<FrontendProjects />} />
               <Route path="/backend-projects" element={<BackendProjects />} />
               <Route path="/*" element={<ErrorPage />} />
