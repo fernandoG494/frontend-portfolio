@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { PlaceThemeContext } from "../context/ThemeContext";
 
-import { ISection } from "../interfaces/layout-interfaces";
+import { IDrawer, ISection } from "../interfaces/layout-interfaces";
 import Section from "../components/Section";
 
 import DarkDev from "../assets/dev-icon-dark.svg";
@@ -10,7 +10,7 @@ import LightDev from "../assets/dev-icon-light.svg";
 import { sectionsData } from "../data/data";
 import { List, Stack, Typography } from "@mui/material";
 
-const DrawerMenu = () => {
+const DrawerMenu = ({ setTitle }: IDrawer) => {
   const themeContext = useContext(PlaceThemeContext);
 
   const {
@@ -45,7 +45,12 @@ const DrawerMenu = () => {
       <List>
         {sectionsData.map((section: ISection) => {
           return (
-            <Section text={section.text} key={section.text} url={section.url} />
+            <Section
+              text={section.text}
+              key={section.text}
+              url={section.url}
+              setTitle={setTitle}
+            />
           );
         })}
       </List>

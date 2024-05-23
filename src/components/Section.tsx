@@ -9,10 +9,11 @@ import IconSelector from "./IconSelector";
 
 import { useNavigate } from "react-router-dom";
 
-const Section = ({ text, url }: ISection) => {
+const Section = ({ text, url, setTitle }: ISection) => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
+    setTitle(text);
     navigate(url);
   };
 

@@ -15,12 +15,12 @@ import {
   IPlaceThemeProvider,
   PlaceThemeContext,
 } from "../context/ThemeContext";
+import DrawerMenu from "../components/DrawerMenu";
 
 import dark from "../styles/themes/dark";
 import light from "../styles/themes/light";
 
 import "../styles/SideMenu.scss";
-import DrawerMenu from "../components/DrawerMenu";
 
 const drawerWidth = 300;
 
@@ -28,8 +28,15 @@ const drawerWidth = 300;
 const SideMenu = ({ children }: any) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [title, setTitle] = useState("Dashboard");
 
   const themeContext = useContext(PlaceThemeContext);
+
+  const {
+    currentTheme: {
+      updatedTheme: { backgrounds, texts },
+    },
+  } = themeContext;
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -67,7 +74,11 @@ const SideMenu = ({ children }: any) => {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar>
+        <Toolbar
+          style={{
+            backgroundColor: backgrounds.bg300,
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -84,8 +95,15 @@ const SideMenu = ({ children }: any) => {
             spacing={2}
             width="100%"
           >
-            <Typography variant="h6" noWrap component="div">
-              Responsive drawer
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              style={{
+                color: texts.text100,
+              }}
+            >
+              {title}
             </Typography>
             <div className="ThemeSwitcher">
               <Switch
@@ -99,7 +117,6 @@ const SideMenu = ({ children }: any) => {
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
       >
         <Drawer
           variant="temporary"
@@ -117,7 +134,7 @@ const SideMenu = ({ children }: any) => {
             },
           }}
         >
-          <DrawerMenu />
+          <DrawerMenu setTitle={setTitle} />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -130,7 +147,7 @@ const SideMenu = ({ children }: any) => {
           }}
           open
         >
-          <DrawerMenu />
+          <DrawerMenu setTitle={setTitle} />
         </Drawer>
       </Box>
       <Box
