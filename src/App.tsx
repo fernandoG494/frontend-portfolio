@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useReducer } from "react";
+import SideMenu from "./layout/SideMenu";
+import light from "./styles/themes/light";
+import { ThemeProvider } from "styled-components";
+import ThemeReducer from "./context/ThemeReducer";
+import { IPlaceThemeProvider, PlaceThemeContext } from "./context/ThemeContext";
+
+import "./App.scss";
+import { Container } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import FrontendProjects from "./pages/FrontendProjects";
+import BackendProjects from "./pages/BackendProjects";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentTheme, setNewTheme] = useReducer(ThemeReducer, []);
+
+  const themeContextProviderValue: IPlaceThemeProvider = {
+    currentTheme,
+    setNewTheme,
+  };
+
+  if (Array.isArray(currentTheme) && !currentTheme.length) {
+    setNewTheme(light);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <PlaceThemeContext.Provider value={themeContextProviderValue}>
+      <ThemeProvider theme={currentTheme.updatedTheme}>
+        <Container>
+          <SideMenu>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/frontend-projects" element={<FrontendProjects />} />
+              <Route path="/backend-projects" element={<BackendProjects />} />
+              <Route path="/*" element={<ErrorPage />} />
+            </Routes>
+          </SideMenu>
+        </Container>
+      </ThemeProvider>
+    </PlaceThemeContext.Provider>
+  );
 }
 
-export default App
+export default App;
